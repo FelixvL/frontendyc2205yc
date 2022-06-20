@@ -10,22 +10,16 @@
         // jQuery ajax
         // fetch
         function startfunctie(){
-            fetch('https://yc2205pythondata.azurewebsites.net/ingredienten/deelnaam/aardappel')
+            var invoertekst = document.getElementById("deinvoer").value;
+            fetch('https://yc2205pythondata.azurewebsites.net/ingredienten/deelnaam/'+invoertekst)
             .then( abc => {
-                console.log(abc);
                 return abc.json();
             })
             .then( qqq =>{
-                console.log(qqq)
-                console.log(qqq["187"]);
                 var htmldiv = document.getElementById("uitkomst");
+                htmldiv.innerHTML = "";
                 for(const property in qqq){
-                    console.log("==========")
-                    console.log(property);
-                    console.log(qqq[property]["Voedingsmiddelgroep"])
-                    //htmldiv.innerHTML += qqq[property]["Voedingsmiddelnaam\/Dutch food name"]+"<br>";
-                    htmldiv.innerHTML += `<span class="itemeten">naam = <i>${qqq[property]["Voedingsmiddelnaam\/Dutch food name"]}</i> aantalkal = <b>25</b> <input class="buttonelem" type="button" onclick="toonnummer(653)" value="selecteer"></span><br>`;
-
+                    htmldiv.innerHTML += `<span class="itemeten">naam = <i>${qqq[property]["Voedingsmiddelnaam\/Dutch food name"]}</i> aantalkal = <b>${qqq[property]["ENERCC (kcal)"]}</b> <input class="buttonelem" type="button" onclick="toonnummer(${property})" value="selecteer"></span><br>`;
                 }
             })
         }
@@ -47,8 +41,7 @@
     </style>
 </head>
 <body>
-    
-    <span class="itemeten">naam = <i>spaghetti</i> aantalkal = <b>25</b> <input class="buttonelem" type="button" onclick="toonnummer(653)" value="selecteer"></span>
+    Wat wil je opzoeken?<input type="text" id="deinvoer">    
     <br><br>
 
     <input type="button" value="haalgegevensop" onclick="startfunctie()">
