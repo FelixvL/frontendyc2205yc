@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // xmlhttprequest
+        // jQuery ajax
+        // fetch
+        function startfunctie(){
+            fetch('https://yc2205pythondata.azurewebsites.net/ingredienten/deelnaam/aardappel')
+            .then( abc => {
+                console.log(abc);
+                return abc.json();
+            })
+            .then( qqq =>{
+                console.log(qqq)
+                console.log(qqq["187"]);
+                var htmldiv = document.getElementById("uitkomst");
+                for(const property in qqq){
+                    console.log("==========")
+                    console.log(property);
+                    console.log(qqq[property]["Voedingsmiddelgroep"])
+                    //htmldiv.innerHTML += qqq[property]["Voedingsmiddelnaam\/Dutch food name"]+"<br>";
+                    htmldiv.innerHTML += `<span class="itemeten">naam = <i>spaghetti</i> aantalkal = <b>25</b> <input class="buttonelem" type="button" onclick="toonnummer(653)" value="selecteer"></span><br>`;
+
+                }
+            })
+        }
+        function toonnummer(deid){
+            alert(deid);
+        }
+    </script>
+    <style>
+        .itemeten{
+            color:chartreuse;
+            background-color: black;
+            padding: 6px;
+        }
+        .buttonelem{
+            color:black;
+            background-color: chartreuse;
+            padding:4px;
+        }
+    </style>
+</head>
+<body>
+    
+    <span class="itemeten">naam = <i>spaghetti</i> aantalkal = <b>25</b> <input class="buttonelem" type="button" onclick="toonnummer(653)" value="selecteer"></span>
+    <br><br>
+
+    <input type="button" value="haalgegevensop" onclick="startfunctie()">
+    <div id="uitkomst">
+
+    </div>
+</body>
+</html>
